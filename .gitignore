@@ -1,3 +1,4 @@
 Pipfile
 Pipfile.lock
 __pycache__
+static/*.png
