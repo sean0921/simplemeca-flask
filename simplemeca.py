@@ -3,14 +3,12 @@
 from flask import Flask, request
 import pygmt
 import os
+import uuid
 
 def show_hello_world() -> str:
     return('Hello World! Welcome to SimpleMeca Service!\n')
 
-#def print_request_concent(request_json) -> dict:
-#    return(request_json)
-
-def pygmt_simplemeca(fig_input,strike=270,dip=90,rake=0,color_r=0,color_g=0,color_b=0,title='Simple Focal Mechanism'):
+def pygmt_simplemeca(fig_input, strike=270, dip=90, rake=0, color_r=0, color_g=0, color_b=0, title='Simple Focal Mechanism'):
     fig_input.basemap(
         region=[-1, 1, -1, 1], 
         projection="M6c",
@@ -21,22 +19,32 @@ def pygmt_simplemeca(fig_input,strike=270,dip=90,rake=0,color_r=0,color_g=0,colo
     fig_input.text(x=0, y=0, text=f'{strike}/{dip}/{rake}', offset='0/-2.5',font='8p')
     return(fig_input)
 
-def test_pygmt(expected_result_uri):
+def test_pygmt(expected_result_uri, this_payload):
     current_dir = os.getcwd()
     fig = pygmt.Figure()
-    fig = pygmt_simplemeca(fig)
-    fig.savefig(current_dir + expected_result_uri)
+    fig = pygmt_simplemeca(
+        fig,
+        strike  = float(this_payload['strike']),
+        dip     = float(this_payload['dip']),
+        rake    = float(this_payload['rake']),
+        color_r = this_payload['color_r'],
+        color_g = this_payload['color_g'],
+        color_b = this_payload['color_b'],
+        title   = this_payload['title'],
+    )
+    fig.savefig(current_dir + '/' + expected_result_uri)
 
 app = Flask(__name__)
 
-@app.route('/hello', methods=['GET', 'POST'])
+@app.route('/simplemeca', methods=['GET', 'POST'])
 
-def hello():
+def simplemeca():
     if request.method == 'POST':
         this_payload = request.json
-        result_uri = '/static/fig.png'
+        fig_filename = str(uuid.uuid4())
+        result_uri = f'static/{fig_filename}.png'
         result_url = request.url_root + result_uri
-        test_pygmt(result_uri)
+        test_pygmt(result_uri, this_payload)
         return result_url
     else:
         return show_hello_world()
