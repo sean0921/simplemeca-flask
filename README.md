@@ -1,5 +1,8 @@
 # Simple Focal Mechanism Generator based on PyGMT
 
+- based on previous work: <https://github.com/sean0921/workshop_demo_20210805>
+- idea: <http://qcntw.earth.sinica.edu.tw/beachball/>
+
 ## Requirements
 - Python 3.8 ~ 3.10
 - Generic Mapping Tools (GMT, >= 6.3.0)
