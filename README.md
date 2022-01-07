@@ -46,6 +46,10 @@
       B in RGB colors
     - **title**<br>
       `string`
+- **Response**
+```
+http://127.0.0.1:5000/static/<uuid-4-format>.png
+```
 
 ## Examples
 - `example_payload.json`
