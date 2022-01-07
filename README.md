@@ -1,4 +1,4 @@
-# simplemeca-flask
+# Simple Focal Mechanism Generator based on PyGMT
 
 ## Requirements
 - Python 3.8 ~ 3.10
