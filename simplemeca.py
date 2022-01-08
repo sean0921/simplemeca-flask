@@ -12,7 +12,7 @@ def show_hello_world() -> str:
 def pygmt_simplemeca(fig_input, strike=270, dip=90, rake=0, color_r=0, color_g=0, color_b=0, title='Simple Focal Mechanism'):
     fig_input.basemap(
         region=[-1, 1, -1, 1], 
-        projection="M6c",
+        projection="M4c",
         frame=[f'+n+t"{title}"']
     )
     focal_mechanism = dict(strike=strike, dip=dip, rake=rake, magnitude=3)
