@@ -1,5 +1,7 @@
 # Simple Focal Mechanism Generator based on PyGMT
 
+![](docs/demo.webp)
+
 - based on previous work: <https://github.com/sean0921/workshop_demo_20210805>
 - idea: <http://qcntw.earth.sinica.edu.tw/beachball/>
 
@@ -54,3 +56,6 @@
 ## Examples
 - `example_payload.json`
 - `test.sh` (a `curl` command)
+
+## TODO
+- use PIL to convert output format to webp (or convince GMT developers to support webp output)
