@@ -4,6 +4,7 @@ from flask import Flask, request
 import pygmt
 import os
 import uuid
+from flask_cors import CORS
 
 def show_hello_world() -> str:
     return('Hello World! Welcome to SimpleMeca Service!\n')
@@ -35,16 +36,19 @@ def test_pygmt(expected_result_uri, this_payload):
     fig.savefig(current_dir + '/' + expected_result_uri)
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/simplemeca', methods=['GET', 'POST'])
 
 def simplemeca():
     if request.method == 'POST':
         this_payload = request.json
+        print(this_payload)
         fig_filename = str(uuid.uuid4())
         result_uri = f'static/{fig_filename}.png'
         result_url = request.url_root + result_uri
         test_pygmt(result_uri, this_payload)
-        return result_url
+        result_data={ 'image_url': result_url }
+        return result_data
     else:
         return show_hello_world()
