@@ -59,3 +59,4 @@
 
 ## TODO
 - use PIL to convert output format to webp (or convince GMT developers to support webp output)
+- [support Chinese](https://docs.gmt-china.org/6.0/chinese/linux/)
