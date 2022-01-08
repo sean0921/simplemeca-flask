@@ -34,7 +34,7 @@ def test_pygmt(expected_result_uri, this_payload):
         color_b = this_payload['color_b'],
         title   = this_payload['title'],
     )
-    fig.savefig(current_dir + '/' + expected_result_uri)
+    fig.savefig(current_dir + '/' + expected_result_uri, dpi=150)
 
 app = Flask(__name__)
 CORS(app)
