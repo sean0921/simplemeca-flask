@@ -10,12 +10,13 @@ def show_hello_world() -> str:
     return('Hello World! Welcome to SimpleMeca Service!\n')
 
 def pygmt_simplemeca(fig_input, strike=270, dip=90, rake=0, color_r=0, color_g=0, color_b=0, title='Simple Focal Mechanism'):
+    pygmt.config(MAP_TITLE_OFFSET='0p')
     fig_input.basemap(
-        region=[-1, 1, -1, 1], 
-        projection="M4c",
+        region=[-1, 1, -1, 0.73],
+        projection="M6c",
         frame=[f'+n+t"{title}"']
     )
-    focal_mechanism = dict(strike=strike, dip=dip, rake=rake, magnitude=3)
+    focal_mechanism = dict(strike=strike, dip=dip, rake=rake, magnitude=3.5)
     fig_input.meca(focal_mechanism, scale="6c", longitude=0, latitude=0, depth=0, G=f'{color_r}/{color_g}/{color_b}')
     fig_input.text(x=0, y=0, text=f'{strike}/{dip}/{rake}', offset='0/-2.5',font='8p')
     return(fig_input)
