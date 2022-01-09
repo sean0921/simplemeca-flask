@@ -60,3 +60,11 @@
 ## TODO
 - use PIL to convert output format to webp (or convince GMT developers to support webp output)
 - [support Chinese](https://docs.gmt-china.org/6.0/chinese/linux/)
+
+## Credit
+- Beachball Frontend: [IES, Academia Sinica](https://www.earth.sinica.edu.tw/)
+
+## Resources
+- [PyGMT documentation](https://www.pygmt.org/latest/)
+- [GMT documentation](https://docs.generic-mapping-tools.org/)
+- [GMT 中文手冊](https://docs.gmt-china.org)
