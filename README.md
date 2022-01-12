@@ -58,7 +58,7 @@
 - `test.sh` (a `curl` command)
 
 ## TODO
-- use PIL to convert output format to webp (or convince GMT developers to support webp output)
+- use PIL to convert output format to webp (or convince [Ghostscript](https://www.ghostscript.com/doc/current/Devices.htm) developers to support webp output)
 - [support Chinese](https://docs.gmt-china.org/6.0/chinese/linux/)
 
 ## Credit
