@@ -59,8 +59,11 @@
 
 ## TODO
 - Support arguments of moment tensor decompositions
-- use PIL to convert output format to webp (or convince [Ghostscript](https://www.ghostscript.com/doc/current/Devices.htm) developers to support webp output)
 - [support Chinese](https://docs.gmt-china.org/6.0/chinese/linux/)
+
+## Known Issues
+- Ghostscript does not support webp output, so only consider png or jpg format.
+- GMT 5/6 (PyGMT) realtime performance is worser than legacy GMT 4.x: https://github.com/GenericMappingTools/gmt/issues/587
 
 ## Credit
 - Beachball Frontend: [IES, Academia Sinica](https://www.earth.sinica.edu.tw/)
