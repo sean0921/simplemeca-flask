@@ -39,6 +39,10 @@ def test_pygmt(expected_result_uri, this_payload):
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/')
+def index():
+    return redirect("https://github.com/sean0921/simplemeca-flask", code=302)
+
 @app.route('/simplemeca', methods=['GET', 'POST'])
 def simplemeca():
     if request.method == 'POST':
