@@ -40,7 +40,6 @@ app = Flask(__name__)
 CORS(app)
 
 @app.route('/simplemeca', methods=['GET', 'POST'])
-
 def simplemeca():
     if request.method == 'POST':
         this_payload = request.json
