@@ -26,9 +26,9 @@ def test_pygmt(expected_result_uri, this_payload):
     fig = pygmt.Figure()
     fig = pygmt_simplemeca(
         fig,
-        strike  = float(this_payload['strike']),
-        dip     = float(this_payload['dip']),
-        rake    = float(this_payload['rake']),
+        strike  = int(this_payload['strike']),
+        dip     = int(this_payload['dip']),
+        rake    = int(this_payload['rake']),
         color_r = this_payload['color_r'],
         color_g = this_payload['color_g'],
         color_b = this_payload['color_b'],
