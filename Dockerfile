@@ -18,5 +18,4 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 # project setting
 RUN make init
-EXPOSE 5000
-CMD make _run
+CMD make PORT=$PORT _run

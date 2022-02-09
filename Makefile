@@ -2,6 +2,7 @@
 
 SHELL := /usr/bin/env bash
 PYTHON_VERSION := $(shell python3 -c 'import sys;print(f"{sys.version_info[0]}.{sys.version_info[1]}")')
+PORT := 5000
 
 all: init _run
 
@@ -13,7 +14,7 @@ run: init _run
 
 ## skip pipenv install procedure
 _run:
-	@pipenv run gunicorn -w 4 --bind 0.0.0.0:5000 run_simplemeca:app
+	@pipenv run gunicorn -w 4 --bind 0.0.0.0:$(PORT) run_simplemeca:app
 
 purge: clean
 	@pipenv --rm
