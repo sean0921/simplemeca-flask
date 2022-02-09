@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, request
+from flask import Flask, request, redirect
 import pygmt
 import os
 import uuid
@@ -54,7 +54,8 @@ def simplemeca():
         test_pygmt(result_uri, this_payload)
         if os.getenv('ALWAYS_TLS') == 'True':
             result_data={ 'image_url': result_url.replace('http://', 'https://', 1) }
-        result_data={ 'image_url': result_url }
+        else:
+            result_data={ 'image_url': result_url }
         print(result_data)
         return result_data
     else:
