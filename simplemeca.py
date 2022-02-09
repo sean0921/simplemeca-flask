@@ -49,7 +49,10 @@ def simplemeca():
         result_uri = f'static/{fig_filename}.png'
         result_url = request.url_root + result_uri
         test_pygmt(result_uri, this_payload)
+        if os.getenv('ALWAYS_TLS') == 'True':
+            result_data={ 'image_url': result_url.replace('http://', 'https://', 1) }
         result_data={ 'image_url': result_url }
+        print(result_data)
         return result_data
     else:
         return show_hello_world()

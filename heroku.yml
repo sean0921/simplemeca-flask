@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: sh -c 'make PORT=$PORT run'
+  web: sh -c 'make PORT=$PORT ALWAYS_TLS="True" run'
