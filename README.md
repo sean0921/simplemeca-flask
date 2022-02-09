@@ -2,8 +2,9 @@
 
 ![](docs/demo.webp)
 
-- based on previous work: <https://github.com/sean0921/workshop_demo_20210805>
-- idea: <http://qcntw.earth.sinica.edu.tw/beachball/>
+- Demo web page: <https://beachball.clam.moe>
+- Based on previous work: <https://github.com/sean0921/workshop_demo_20210805>
+- Idea: <http://qcntw.earth.sinica.edu.tw/beachball/>
 
 ## Requirements
 - Python 3.8 ~ 3.10
@@ -63,7 +64,7 @@
 
 ## Known Issues
 - Ghostscript does not support webp output, so only consider png or jpg format.
-- GMT 5/6 (PyGMT) realtime performance is worser than legacy GMT 4.x: https://github.com/GenericMappingTools/gmt/issues/587
+- GMT 5/6 (PyGMT) realtime performance is worser than legacy GMT 4.x: <https://github.com/GenericMappingTools/gmt/issues/587>
 
 ## Credit
 - Beachball Frontend: [IES, Academia Sinica](https://www.earth.sinica.edu.tw/)
