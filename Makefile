@@ -13,7 +13,7 @@ run: init _run
 
 ## skip pipenv install procedure
 _run:
-	@pipenv run env FLASK_APP=simplemeca flask run
+	@pipenv run gunicorn -w 4 --bind 0.0.0.0:5000 run_simplemeca:app
 
 purge: clean
 	@pipenv --rm
