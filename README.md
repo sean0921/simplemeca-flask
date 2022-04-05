@@ -21,6 +21,9 @@
 
 ## Test the Web Application
 - Linux / WSLg: `bash local_gui_test.bash` (based on a `curl` command)
+![](docs/demo_test1.webp)
+![](docs/demo_test2.webp)
+![](docs/demo_test3.webp)
 
 ## Method
 - **URL**: POST `/simplemeca`
