@@ -20,9 +20,7 @@
 - `make run`
 
 ## Test the Web Application
-- check payload in `example_payload.json`
-- `cp example_payload.json payload.json`
-- `sh test.sh`
+- Linux / WSLg: `bash local_gui_test.bash` (based on a `curl` command)
 
 ## Method
 - **URL**: POST `/simplemeca`
@@ -56,7 +54,6 @@
 
 ## Examples
 - `example_payload.json`
-- `test.sh` (a `curl` command)
 
 ## TODO
 - Support arguments of moment tensor decompositions
