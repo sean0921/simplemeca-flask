@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-ANSI_RED="\x1b[1;31m"
-ANSI_GREEN="\x1b[1;32m"
-ANSI_END="\x1b[0m"
+ANSI_RED="\033[1;31m"
+ANSI_GREEN="\033[1;32m"
+ANSI_YELLOW="\033[1;33m"
+ANSI_END="\033[0m"
 
 ##################### functions
 
 check_value() {
     my_value=$1
     if [[ $my_value == "" ]]; then
-        printf "${ANSI_RED}Check your payload!${ANSI_END}\n"
+        printf "${ANSI_RED}[ERR] Check your payload!${ANSI_END}\n"
         exit 1
     fi
 }
@@ -17,30 +18,79 @@ check_value() {
 check_program() {
     my_program=$1
     if [ -z $(command -v ${my_program}) ]; then
-        printf "${ANSI_RED}Please Install ${my_program}!${ANSI_END}\n"
+        printf "${ANSI_RED}[ERR] Please Install ${my_program}!${ANSI_END}\n"
     fi
 }
 
 ##################### main program
 #set -eux
 
+check_program bash
 check_program curl
 check_program zenity
+check_program jq
 
-if [ "$(curl -s -L http://127.0.0.1:5000/simplemeca)" != "Hello World! Welcome to SimpleMeca Service!" ]; then
-    printf "${ANSI_RED}Please Check Local Service is UP!${ANSI_END}\n"
+my_shell=$(ps -p $$|awk 'NR>1{print $4}')
+if [ $my_shell != bash ]; then
+    printf "${ANSI_RED}[ERR] Shell is not correct! ${ANSI_YELLOW}(Should be bash)${ANSI_END}\n"
     exit 1
-else
-    printf "${ANSI_GREEN}Service is up!${ANSI_END}\n"
 fi
 
-strike="$(  zenity --entry --text="strike"              --title="Create your Payload")"
-dip="$(     zenity --entry --text="dip"                 --title="Create your Payload")"
-rake="$(    zenity --entry --text="rake"                --title="Create your Payload")"
-color_r="$( zenity --entry --text="RGB color: Red"      --title="Create your Payload")"
-color_g="$( zenity --entry --text="RGB color: Green"    --title="Create your Payload")"
-color_b="$( zenity --entry --text="RGB color: Blue"     --title="Create your Payload")"
-title="$(   zenity --entry --text="title"               --title="Create your Payload")"
+if [ "$(curl -s -L http://127.0.0.1:5000/simplemeca)" == "Hello World! Welcome to SimpleMeca Service!" ]; then
+    printf "${ANSI_GREEN}[INFO] Service is up!${ANSI_END}\n"
+else
+    printf "${ANSI_RED}[ERR] Please Check Local Service is UP!${ANSI_END}\n"
+    exit 1
+fi
+
+declare -a form_output
+declare -a color_code_rgb
+
+form_output=( $(zenity --forms --title="Create your Payload" \
+        --text="Enter information about your payload." \
+        --separator=" " \
+        --add-entry="Strike" \
+        --add-entry="dip" \
+        --add-entry="rake" \
+        --add-entry="Title") )
+case $? in
+    0)
+        printf "${ANSI_GREEN}[INFO] Payload added.${ANSI_END}\n"
+        ;;
+    1)
+        printf "${ANSI_RED}[ERR] Program interupted.${ANSI_END}\n"
+        exit 1
+	;;
+    -1)
+        printf "${ANSI_RED}[ERR] An unexpected error has occurred.${ANSI_END}\n"
+        exit 1
+	;;
+esac
+
+color_code_rgb=$(zenity --color-selection --show-palette)
+case $? in
+         0)
+		printf "${ANSI_GREEN}[INFO] You selected ${ANSI_YELLOW}${color_code_rgb}${ANSI_GREEN}.${ANSI_END}\n"
+                ;;
+         1)
+                printf "${ANSI_YELLOW}[WARN] No color selected.${ANSI_END}\n"
+                color_code_rgb="rgb(0,0,0)"
+                ;;
+        -1)
+                printf "${ANSI_RED}[ERR] An unexpected error has occurred.${ANSI_END}\n"
+                exit 1
+                ;;
+esac
+
+strike=${form_output[0]}
+dip=${form_output[1]}
+rake=${form_output[2]}
+title=${form_output[3]}
+
+color_code=( $(echo ${color_code_rgb} | sed -e 's/rgb(//' -e 's/)//' -e 's/,/ /g') )
+color_r=${color_code[0]}
+color_g=${color_code[1]}
+color_b=${color_code[2]}
 
 check_value $strike
 check_value $dip
@@ -72,7 +122,7 @@ image_url_value=$(curl -s \
     | jq '.image_url') || ( printf "${ANSI_RED}Check your payload!${ANSI_END}\n"; exit 1)
 
 image_url=$(echo ${image_url_value} | tr -d  '"')
-echo ${image_url}
+printf "${ANSI_GREEN}[INFO] image URL is: ${ANSI_YELLOW}${image_url}${ANSI_END}\n"
 
 if [ $(command -v eog) ]; then
     eog ${image_url}
