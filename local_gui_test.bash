@@ -48,7 +48,7 @@ check_value $rake
 check_value $color_r
 check_value $color_g
 check_value $color_b
-check_value $title
+#check_value $title
 
 cat > payload.json << END
 {
