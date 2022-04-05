@@ -56,7 +56,13 @@
 - `example_payload.json`
 
 ## TODO
-- Support arguments of moment tensor decompositions
+- Support arguments of moment tensor decompositions:
+```bash
+#X Y depth mrr mtt mff mrt mrf mtf exp newX newY title
+gmt meca -Rg -JN15c -Sm2c -png << EOF
+-176.96 -29.25 47.8 7.680 0.090 -7.770 1.390 4.520 -3.260 26 0 0 title
+EOF
+```
 - [support Chinese](https://docs.gmt-china.org/6.0/chinese/linux/)
 
 ## Known Issues
