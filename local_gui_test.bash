@@ -34,13 +34,13 @@ else
     printf "${ANSI_GREEN}Service is up!${ANSI_END}\n"
 fi
 
-strike="$(  zenity --entry --text="strike"  --title="Create your Payload")"
-dip="$(     zenity --entry --text="dip"     --title="Create your Payload")"
-rake="$(    zenity --entry --text="rake"    --title="Create your Payload")"
-color_r="$( zenity --entry --text="color_r" --title="Create your Payload")"
-color_g="$( zenity --entry --text="color_g" --title="Create your Payload")"
-color_b="$( zenity --entry --text="color_b" --title="Create your Payload")"
-title="$(   zenity --entry --text="title"   --title="Create your Payload")"
+strike="$(  zenity --entry --text="strike"              --title="Create your Payload")"
+dip="$(     zenity --entry --text="dip"                 --title="Create your Payload")"
+rake="$(    zenity --entry --text="rake"                --title="Create your Payload")"
+color_r="$( zenity --entry --text="RGB color: Red"      --title="Create your Payload")"
+color_g="$( zenity --entry --text="RGB color: Green"    --title="Create your Payload")"
+color_b="$( zenity --entry --text="RGB color: Blue"     --title="Create your Payload")"
+title="$(   zenity --entry --text="title"               --title="Create your Payload")"
 
 check_value $strike
 check_value $dip
