@@ -20,7 +20,7 @@
 - `make run`
 
 ## Test the Web Application
-- Linux / WSLg: `bash local_gui_test.bash` (based on a `curl` command)
+- Linux / WSLg: `make test` ( `bash local_gui_test.bash` )
 ![](docs/demo_test1.webp)
 ![](docs/demo_test2.webp)
 ![](docs/demo_test3.webp)

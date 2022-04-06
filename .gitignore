@@ -1,3 +1,5 @@
+*.swp
+.*.swp
 Pipfile
 Pipfile.lock
 __pycache__
