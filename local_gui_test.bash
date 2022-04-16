@@ -4,6 +4,7 @@ ANSI_RED="\033[1;31m"
 ANSI_GREEN="\033[1;32m"
 ANSI_YELLOW="\033[1;33m"
 ANSI_END="\033[0m"
+trap ctrl_c INT
 
 ##################### functions
 
@@ -17,6 +18,12 @@ check_exit() {
         kill -15 ${server_pid}
         exit ${exit_status}
     fi
+}
+
+function ctrl_c()
+{
+    printf "${ANSI_YELLOW}[WARN] CTRL+C received, exit!${ANSI_END}\n"
+    check_exit 0 ${test_server_pid}
 }
 
 check_program() {
@@ -52,8 +59,14 @@ if [ $my_shell != bash ]; then
 fi
 
 # startup test server
-make _run &
-test_server_pid=$!
+if [ $1 == "--no-pipenv" ]; then
+    printf "${ANSI_GREEN}[INFO] Don't startup testing server by pipenv!${ANSI_END}\n"
+    gunicorn -w 4 run_simplemeca:app &
+    test_server_pid=$!
+else
+    make _run &
+    test_server_pid=$!
+fi
 
 declare -a form_output
 declare -a color_code_rgb
