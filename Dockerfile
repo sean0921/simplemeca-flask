@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 # env
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
@@ -8,12 +8,8 @@ WORKDIR /work
 # install python3 and pipenv
 RUN apt-get update \
     &&  apt-get install -y --no-install-recommends \
-        python3 python3-pip gnupg curl ca-certificates gmt-gshhg ghostscript \
-    &&  ( curl -fsSL https://www.clam.ml/gpg-pubkey/sean.gpg | gpg --dearmor -o  /usr/share/keyrings/sean-test-keyring.gpg ) \
-    &&  ( echo 'deb [signed-by=/usr/share/keyrings/sean-test-keyring.gpg] https://raw.githubusercontent.com/sean0921/seanrepo/master/bullseye ./' | tee /etc/apt/sources.list.d/seanrepo.list ) \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-       gmt libgmt-dev gmt-dcw \
+        python3 python3-pip python3-importlib-metadata \
+        ca-certificates gmt-gshhg ghostscript gmt libgmt-dev gmt-dcw \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && pip install --upgrade pip micropipenv \
