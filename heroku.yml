@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: sh -c 'make PORT=$PORT ALWAYS_TLS="True" run'
+  web: sh -c 'env ALWAYS_TLS="True" gunicorn -w 4 --bind 0.0.0.0:$PORT run_simplemeca:app'
