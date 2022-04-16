@@ -59,7 +59,7 @@ if [ $my_shell != bash ]; then
 fi
 
 # startup test server
-if [ $1 == "--no-pipenv" ]; then
+if [ $1 = "--no-pipenv" ]; then
     printf "${ANSI_GREEN}[INFO] Don't startup testing server by pipenv!${ANSI_END}\n"
     gunicorn -w 4 run_simplemeca:app &
     test_server_pid=$!
