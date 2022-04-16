@@ -10,6 +10,3 @@ flask-cors = "*"
 gunicorn = "*"
 
 [dev-packages]
-
-[requires]
-python_version = "@PYTHON_VERSION@"
