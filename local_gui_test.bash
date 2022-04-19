@@ -59,7 +59,7 @@ if [ $my_shell != bash ]; then
 fi
 
 # startup test server
-if [ $1 = "--no-pipenv" ]; then
+if [ -n "$1" ]; then
     printf "${ANSI_GREEN}[INFO] Don't startup testing server by pipenv!${ANSI_END}\n"
     gunicorn -w 4 run_simplemeca:app &
     test_server_pid=$!
@@ -157,7 +157,7 @@ image_url=$(echo ${image_url_value} | tr -d  '"')
 printf "${ANSI_GREEN}[INFO] image URL is: ${ANSI_YELLOW}${image_url}${ANSI_END}\n"
 
 if [ $(command -v eog) ]; then
-    eog ${image_url}
+    eog -n ${image_url}
     check_exit 0 ${test_server_pid}
 else
     if [ $(command -v eom) ]; then
