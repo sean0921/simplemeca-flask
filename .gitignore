@@ -1,6 +1,6 @@
 *.swp
 .*.swp
 __pycache__
-static/*.png
+/simplemeca_flask/static/*.png
 payload.json
 .venv

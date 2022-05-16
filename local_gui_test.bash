@@ -60,7 +60,7 @@ fi
 
 # startup test server
 if [ -n "$1" ]; then
-    printf "${ANSI_GREEN}[INFO] Don't startup testing server by pipenv!${ANSI_END}\n"
+    printf "${ANSI_GREEN}[INFO] Don't startup testing server by poetry!${ANSI_END}\n"
     gunicorn -w 4 run_simplemeca:app &
     test_server_pid=$!
 else
