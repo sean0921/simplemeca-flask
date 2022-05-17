@@ -150,7 +150,7 @@ image_url_value=$(curl -s \
     | jq '.image_url') || ( printf "%s[ERR] Check your payload!%s\n" "${ANSI_RED}" "${ANSI_END}"; check_exit 1)
 
 image_url=$(echo "${image_url_value}" | tr -d  '"')
-printf "%s[INFO] image URL is: %s%s$%s\n" "${ANSI_GREEN}" "${ANSI_YELLOW}" "${image_url}" "${ANSI_END}"
+printf "%s[INFO] image URL is: %s%s%s\n" "${ANSI_GREEN}" "${ANSI_YELLOW}" "${image_url}" "${ANSI_END}"
 
 if [ "$(command -v eog)" ]; then
     eog -n "${image_url}"
