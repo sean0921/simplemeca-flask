@@ -10,20 +10,18 @@ trap ctrl_c INT
 
 check_exit() {
     exit_status=$1
-    server_pid=$2
-    if [ -z ${server_pid} ]
-    then
-        exit ${exit_status}
+    if [ "${exit_status}" = "0" ]; then
+        printf "%s[INFO] Program normally terminated!%s" "${ANSI_GREEN}" "${ANSI_END}"
     else
-        kill -15 ${server_pid}
-        exit ${exit_status}
+        printf "%s[WARN] Program unnormally terminated! (exit code: %d)%s" "${ANSI_YELLOW}" "${exit_status}" "${ANSI_END}"
     fi
+    exit "${exit_status}"
 }
 
 function ctrl_c()
 {
     printf "${ANSI_YELLOW}[WARN] CTRL+C received, exit!${ANSI_END}\n"
-    check_exit 0 ${test_server_pid}
+    check_exit 0
 }
 
 check_program() {
@@ -58,16 +56,6 @@ if [ $my_shell != bash ]; then
     check_exit 1
 fi
 
-# startup test server
-if [ -n "$1" ]; then
-    printf "${ANSI_GREEN}[INFO] Don't startup testing server by poetry!${ANSI_END}\n"
-    gunicorn -w 4 --chdir ../simplemeca_flask run_simplemeca:app &
-    test_server_pid=$!
-else
-    make _run &
-    test_server_pid=$!
-fi
-
 declare -a form_output
 declare -a color_code_rgb
 
@@ -84,11 +72,11 @@ case $? in
         ;;
     1)
         printf "${ANSI_RED}[ERR] Program interupted.${ANSI_END}\n"
-        check_exit 1 ${test_server_pid}
+        check_exit 1
 	;;
     -1)
         printf "${ANSI_RED}[ERR] An unexpected error has occurred.${ANSI_END}\n"
-        check_exit 1 ${test_server_pid}
+        check_exit 1
 	;;
 esac
 
@@ -103,7 +91,7 @@ case $? in
                 ;;
         -1)
                 printf "${ANSI_RED}[ERR] An unexpected error has occurred.${ANSI_END}\n"
-                check_exit 1 ${test_server_pid}
+                check_exit 1
                 ;;
 esac
 
@@ -137,13 +125,13 @@ cat > payload.json << END
 }
 END
 
-( cat payload.json | jq -C . ) || ( printf "${ANSI_RED}Check your payload!${ANSI_END}\n" ; check_exit 1 ${test_server_pid})
+( cat payload.json | jq -C . ) || ( printf "${ANSI_RED}Check your payload!${ANSI_END}\n" ; check_exit 1)
 
 if [ "$(curl -s -L http://127.0.0.1:5000/simplemeca)" == "Hello World! Welcome to SimpleMeca Service!" ]; then
     printf "${ANSI_GREEN}[INFO] Service is up!${ANSI_END}\n"
 else
     printf "${ANSI_RED}[ERR] Please Check Local Service is UP!${ANSI_END}\n"
-    check_exit 1 ${test_server_pid}
+    check_exit 1
 fi
 
 image_url_value=$(curl -s \
@@ -151,22 +139,22 @@ image_url_value=$(curl -s \
     -H 'Content-Type: application/json' \
     -d @'payload.json' \
     -L "http://127.0.0.1:5000/simplemeca" \
-    | jq '.image_url') || ( printf "${ANSI_RED}Check your payload!${ANSI_END}\n"; check_exit 1 ${test_server_pid})
+    | jq '.image_url') || ( printf "${ANSI_RED}Check your payload!${ANSI_END}\n"; check_exit 1)
 
 image_url=$(echo ${image_url_value} | tr -d  '"')
 printf "${ANSI_GREEN}[INFO] image URL is: ${ANSI_YELLOW}${image_url}${ANSI_END}\n"
 
 if [ $(command -v eog) ]; then
     eog -n ${image_url}
-    check_exit 0 ${test_server_pid}
+    check_exit 0
 else
     if [ $(command -v eom) ]; then
         eom ${image_url}
-        check_exit 0 ${test_server_pid}
+        check_exit 0
     fi
 fi
 
 xdg-open ${image_url}
 
 # shutdown test server
-check_exit 0 ${test_server_pid}
+check_exit 0
