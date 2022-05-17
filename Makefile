@@ -22,7 +22,7 @@ _run:
                 run_simplemeca:app
 
 _test:
-	@bash local_gui_test.bash
+	@cd test && bash local_gui_test.bash
 
 purge: clean
 	@poetry env remove python3

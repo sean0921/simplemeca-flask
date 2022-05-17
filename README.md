@@ -20,6 +20,7 @@
 - `make run`
 
 ## Test the Web Application
+- Windows: Run the app in WSL2/Docker or remote Linux server, and try `local_gui_test.ps1`
 - Linux / WSLg: `make test` ( `bash local_gui_test.bash` )
 ![](docs/demo_test1.webp)
 ![](docs/demo_test2.webp)
