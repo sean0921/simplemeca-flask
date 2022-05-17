@@ -61,7 +61,7 @@ fi
 # startup test server
 if [ -n "$1" ]; then
     printf "${ANSI_GREEN}[INFO] Don't startup testing server by poetry!${ANSI_END}\n"
-    gunicorn -w 4 run_simplemeca:app &
+    gunicorn -w 4 --chdir ../simplemeca_flask run_simplemeca:app &
     test_server_pid=$!
 else
     make _run &
