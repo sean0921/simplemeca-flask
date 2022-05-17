@@ -4,3 +4,4 @@ __pycache__
 /simplemeca_flask/static/*.png
 payload.json
 .venv
+.vscode
