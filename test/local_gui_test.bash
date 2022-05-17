@@ -58,6 +58,12 @@ fi
 
 declare -a form_output
 
+#apiurl="http://127.0.0.1:5000/simplemeca"
+read -r apiurl <<< "$(zenity --title='Type your API server URL' \
+        --width=400 \
+        --entry='URL:' \
+        --entry-text='http://127.0.0.1:5000/simplemeca')"
+
 IFS=" " read -r -a form_output <<< "$(zenity --forms --title='Type your Beachball Info' \
         --text='Enter information about your beachball.' \
         --separator=" " \
@@ -80,31 +86,31 @@ case $? in
 	;;
 esac
 
-color_code_rgb=$(zenity --color-selection --show-palette --title='Choose Your Beachball Color')
+color_code_rgb=$(zenity --color-selection --show-palette --color="rgb(255,0,0)" --title='Choose Your Beachball Color')
 case $? in
          0)
 		printf "%s[INFO] You selected %s%s%s.%s\n" "${ANSI_GREEN}" "${ANSI_YELLOW}" "${color_code_rgb}" "${ANSI_GREEN}" "${ANSI_END}"
                 ;;
          1)
                 printf "%s[WARN] No color selected.%s\n" "${ANSI_YELLOW}" "${ANSI_END}"
-                color_code_rgb="rgb(0,0,0)"
+                color_code_rgb="rgb(255,0,0)"
                 ;;
         -1)
                 printf "%s[ERR] An unexpected error has occurred.%s\n" "${ANSI_RED}" "${ANSI_END}"
-                color_code_rgb="rgb(0,0,0)"
+                color_code_rgb="rgb(255,0,0)"
                 check_exit 1
                 ;;
 esac
 
-strike=${form_output[0]}
-dip=${form_output[1]}
-rake=${form_output[2]}
-title=${form_output[3]}
+strike="${form_output[0]}"
+dip="${form_output[1]}"
+rake="${form_output[2]}"
+title="${form_output[3]}"
 
 IFS=" " read -r -a color_code <<< "$(echo ${color_code_rgb} | sed -e 's/rgb(//' -e 's/)//' -e 's/,/ /g')"
-color_r=${color_code[0]}
-color_g=${color_code[1]}
-color_b=${color_code[2]}
+color_r="${color_code[0]}"
+color_g="${color_code[1]}"
+color_b="${color_code[2]}"
 
 check_value "${strike}"
 check_value "${dip}"
@@ -112,6 +118,7 @@ check_value "${rake}"
 check_value "${color_r}"
 check_value "${color_g}"
 check_value "${color_b}"
+check_value "${apiurl}"
 #check_value $title
 
 cat > payload.json << END
@@ -128,7 +135,7 @@ END
 
 ( jq -C . payload.json ) || ( "%s[ERR] Check your payload!%s\n" "${ANSI_RED}" "${ANSI_END}" ; check_exit 1)
 
-if [ "$(curl -s -L http://127.0.0.1:5000/simplemeca)" == "Hello World! Welcome to SimpleMeca Service!" ]; then
+if [ "$(curl -s -L "${apiurl}")" == "Hello World! Welcome to SimpleMeca Service!" ]; then
     printf "%s[INFO] Service is available!%s\n" "${ANSI_GREEN}" "${ANSI_END}"
 else
     printf "%s[ERR] Please Check Local Service is UP!%s\n" "${ANSI_RED}" "${ANSI_END}"
@@ -139,7 +146,7 @@ image_url_value=$(curl -s \
     -X POST \
     -H 'Content-Type: application/json' \
     -d @'payload.json' \
-    -L "http://127.0.0.1:5000/simplemeca" \
+    -L "${apiurl}" \
     | jq '.image_url') || ( printf "%s[ERR] Check your payload!%s\n" "${ANSI_RED}" "${ANSI_END}"; check_exit 1)
 
 image_url=$(echo "${image_url_value}" | tr -d  '"')
