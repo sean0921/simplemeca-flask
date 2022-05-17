@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, url_for
 import pygmt
 import os
 import uuid
@@ -45,6 +45,10 @@ def index():
 
 @app.route('/simplemeca', methods=['GET', 'POST'])
 def simplemeca():
+    return redirect(url_for('simplemeca_v1'), code=307)
+
+@app.route('/v1/simplemeca', methods=['GET', 'POST'])
+def simplemeca_v1():
     if request.method == 'POST':
         this_payload = request.json
         print(this_payload)
