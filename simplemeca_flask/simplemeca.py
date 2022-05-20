@@ -1,15 +1,38 @@
 #!/usr/bin/env python3
 
+from typing import Dict, Any
 from flask import Flask, request, redirect, url_for
+from flask_cors import CORS
+from pathlib import Path
 import pygmt
 import os
 import uuid
-from flask_cors import CORS
+import hashlib
+import json
+
+# ref: https://www.doc.ic.ac.uk/~nuric/coding/how-to-hash-a-dictionary-in-python.html
+def dict_hash(dictionary: Dict[str, Any]) -> str:
+    """SHA256 hash of a dictionary."""
+    dhash = hashlib.sha256()
+    # We need to sort arguments so {'a': 1, 'b': 2} is
+    # the same as {'b': 2, 'a': 1}
+    encoded = json.dumps(dictionary, sort_keys=True).encode()
+    dhash.update(encoded)
+    return dhash.hexdigest()
 
 def show_hello_world() -> str:
     return('Hello World! Welcome to SimpleMeca Service!\n')
 
-def pygmt_simplemeca(fig_input, strike=270, dip=90, rake=0, color_r=0, color_g=0, color_b=0, title='Simple Focal Mechanism'):
+def pygmt_simplemeca(
+        fig_input: pygmt.figure.Figure,
+        strike=270,
+        dip=90,
+        rake=0,
+        color_r=0,
+        color_g=0,
+        color_b=0,
+        title=''
+    ) -> pygmt.figure.Figure:
     pygmt.config(MAP_TITLE_OFFSET='0p')
     fig_input.basemap(
         region=[-1, 1, -1, 0.73],
@@ -21,7 +44,7 @@ def pygmt_simplemeca(fig_input, strike=270, dip=90, rake=0, color_r=0, color_g=0
     fig_input.text(x=0, y=0, text=f'{strike}/{dip}/{rake}', offset='0/-2.5',font='8p')
     return(fig_input)
 
-def test_pygmt(expected_result_uri, this_payload):
+def test_pygmt(expected_result_uri: str, this_payload: dict):
     current_dir = os.getcwd()
     fig = pygmt.Figure()
     fig = pygmt_simplemeca(
@@ -52,10 +75,15 @@ def simplemeca_v1():
     if request.method == 'POST':
         this_payload = request.json
         print(this_payload)
-        fig_filename = str(uuid.uuid4())
+        fig_filename = dict_hash(this_payload)
         result_uri = f'static/{fig_filename}.png'
         result_url = request.url_root + result_uri
-        test_pygmt(result_uri, this_payload)
+        if not Path(result_uri).is_file():
+            print(f'Creating: {result_uri}....',end=' ')
+            test_pygmt(result_uri, this_payload)
+            print(f'OK!')
+        else:
+            print('image exists, skip!')
         if os.getenv('ALWAYS_TLS') == 'True':
             result_data={ 'image_url': result_url.replace('http://', 'https://', 1) }
         else:
