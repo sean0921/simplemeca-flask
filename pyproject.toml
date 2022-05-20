@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simplemeca-flask"
-version = "1.1.0"
+version = "1.2.0"
 description = "Simple Focal Mechanism Generator based on PyGMT"
 authors = ["Sean Ho <sean.li.shin.ho@gmail.com>"]
 license = "MIT"
