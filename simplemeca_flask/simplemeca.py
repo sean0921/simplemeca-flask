@@ -6,7 +6,6 @@ from flask_cors import CORS
 from pathlib import Path
 import pygmt
 import os
-import uuid
 import hashlib
 import json
 
