@@ -176,7 +176,7 @@ test = ["hypothesis (>=5.5.3)", "pytest (>=6.0)", "pytest-xdist (>=1.31)"]
 
 [[package]]
 name = "pygmt"
-version = "0.6.1"
+version = "0.7.0"
 description = "A Python interface for the Generic Mapping Tools"
 category = "main"
 optional = false
@@ -184,7 +184,7 @@ python-versions = ">=3.8"
 
 [package.dependencies]
 netCDF4 = "*"
-numpy = ">=1.19"
+numpy = ">=1.20"
 packaging = "*"
 pandas = "*"
 xarray = "*"
@@ -287,7 +287,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "2fd01d79d4f3b7c33ab244d32bb984c930b6512620fc42c7a5c644ab6cb611be"
+content-hash = "5055cac9c1ac41e6ab3d554462979a7b76096077cbaf119ee99014bfcceb7252"
 
 [metadata.files]
 cftime = [
@@ -477,8 +477,8 @@ pandas = [
     {file = "pandas-1.4.3.tar.gz", hash = "sha256:2ff7788468e75917574f080cd4681b27e1a7bf36461fe968b49a87b5a54d007c"},
 ]
 pygmt = [
-    {file = "pygmt-0.6.1-py3-none-any.whl", hash = "sha256:b0c5a699d4582ecf444b7b6a893dc431e0708113c6fb1661b3075789a718aa2b"},
-    {file = "pygmt-0.6.1.tar.gz", hash = "sha256:227d372cf725f06e2b0cb33ff62edf7cadd862755e0e9d2aa6caf285d16d322a"},
+    {file = "pygmt-0.7.0-py3-none-any.whl", hash = "sha256:bfb1b698ed59d9ceab9deba536dcd3b157cfe7b4a41f3ea2a3d8ecc0840de5dc"},
+    {file = "pygmt-0.7.0.tar.gz", hash = "sha256:ac25944cafb2d8e378dd12d8ccfc20c84161162d1f68834256857f562f80cf5c"},
 ]
 pyparsing = [
     {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
