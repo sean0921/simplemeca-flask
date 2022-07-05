@@ -13,6 +13,7 @@ pygmt = "^0.7.0"
 Flask = "^2.1.2"
 Flask-Cors = "^3.0.10"
 gunicorn = "^20.1.0"
+poetryup = "^0.9.0"
 
 [build-system]
 requires = ["poetry-core"]
