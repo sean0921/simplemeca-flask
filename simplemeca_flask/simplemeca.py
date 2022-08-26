@@ -52,13 +52,13 @@ def test_pygmt(expected_result_uri: str, this_payload: dict):
     fig = pygmt.Figure()
     fig = pygmt_simplemeca(
         fig,
-        strike  = int(this_payload['strike']),
-        dip     = int(this_payload['dip']),
-        rake    = int(this_payload['rake']),
+        strike = int(this_payload['strike']),
+        dip = int(this_payload['dip']),
+        rake = int(this_payload['rake']),
         color_r = this_payload['color_r'],
         color_g = this_payload['color_g'],
         color_b = this_payload['color_b'],
-        title   = this_payload['title'],
+        title = this_payload['title'],
     )
     fig.savefig(current_dir + '/' + expected_result_uri, dpi=150)
 
