@@ -9,6 +9,7 @@ import os
 import hashlib
 import json
 
+
 # ref: https://www.doc.ic.ac.uk/~nuric/coding/how-to-hash-a-dictionary-in-python.html
 def dict_hash(dictionary: Dict[str, Any]) -> str:
     """SHA256 hash of a dictionary."""
@@ -19,8 +20,10 @@ def dict_hash(dictionary: Dict[str, Any]) -> str:
     dhash.update(encoded)
     return dhash.hexdigest()
 
+
 def show_hello_world() -> str:
     return('Hello World! Welcome to SimpleMeca Service!\n')
+
 
 def pygmt_simplemeca(
         fig_input: pygmt.figure.Figure,
@@ -43,6 +46,7 @@ def pygmt_simplemeca(
     fig_input.text(x=0, y=0, text=f'{strike}/{dip}/{rake}', offset='0/-2.5',font='8p')
     return(fig_input)
 
+
 def test_pygmt(expected_result_uri: str, this_payload: dict):
     current_dir = os.getcwd()
     fig = pygmt.Figure()
@@ -61,13 +65,16 @@ def test_pygmt(expected_result_uri: str, this_payload: dict):
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/')
 def index():
     return redirect("https://github.com/sean0921/simplemeca-flask", code=302)
 
+
 @app.route('/simplemeca', methods=['GET', 'POST'])
 def simplemeca():
     return redirect(url_for('simplemeca_v1'), code=307)
+
 
 @app.route('/v1/simplemeca', methods=['GET', 'POST'])
 def simplemeca_v1():
