@@ -10,7 +10,8 @@ import hashlib
 import json
 
 
-# ref: https://www.doc.ic.ac.uk/~nuric/coding/how-to-hash-a-dictionary-in-python.html
+# ref:
+# https://www.doc.ic.ac.uk/~nuric/coding/how-to-hash-a-dictionary-in-python.html
 def dict_hash(dictionary: Dict[str, Any]) -> str:
     """SHA256 hash of a dictionary."""
     dhash = hashlib.sha256()
@@ -34,7 +35,7 @@ def pygmt_simplemeca(
         color_g=0,
         color_b=0,
         title=''
-    ) -> pygmt.figure.Figure:
+) -> pygmt.figure.Figure:
     pygmt.config(MAP_TITLE_OFFSET='0p')
     fig_input.basemap(
         region=[-1, 1, -1, 0.73],
@@ -42,8 +43,21 @@ def pygmt_simplemeca(
         frame=[f'+n+t"{title}"']
     )
     focal_mechanism = dict(strike=strike, dip=dip, rake=rake, magnitude=3.5)
-    fig_input.meca(focal_mechanism, scale="6c", longitude=0, latitude=0, depth=0, G=f'{color_r}/{color_g}/{color_b}')
-    fig_input.text(x=0, y=0, text=f'{strike}/{dip}/{rake}', offset='0/-2.5',font='8p')
+    fig_input.meca(
+            focal_mechanism,
+            scale="6c",
+            longitude=0,
+            latitude=0,
+            depth=0,
+            G=f'{color_r}/{color_g}/{color_b}'
+    )
+    fig_input.text(
+            x=0,
+            y=0,
+            text=f'{strike}/{dip}/{rake}',
+            offset='0/-2.5',
+            font='8p'
+    )
     return(fig_input)
 
 
@@ -61,6 +75,7 @@ def test_pygmt(expected_result_uri: str, this_payload: dict):
         title=this_payload['title'],
     )
     fig.savefig(current_dir + '/' + expected_result_uri, dpi=150)
+
 
 app = Flask(__name__)
 CORS(app)
@@ -85,15 +100,17 @@ def simplemeca_v1():
         result_uri = f'static/{fig_filename}.png'
         result_url = request.url_root + result_uri
         if not Path(result_uri).is_file():
-            print(f'Creating: {result_uri}....',end=' ')
+            print(f'Creating: {result_uri}....', end=' ')
             test_pygmt(result_uri, this_payload)
-            print(f'OK!')
+            print('OK!')
         else:
             print('image exists, skip!')
         if os.getenv('ALWAYS_TLS') == 'True':
-            result_data={ 'image_url': result_url.replace('http://', 'https://', 1) }
+            result_data = {
+                    'image_url': result_url.replace('http://', 'https://', 1)
+            }
         else:
-            result_data={ 'image_url': result_url }
+            result_data = {'image_url': result_url}
         print(result_data)
         return result_data
     else:
