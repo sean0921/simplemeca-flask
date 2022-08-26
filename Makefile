@@ -2,7 +2,7 @@
 
 SHELL := /usr/bin/env bash
 PORT := 5000
-NUM_WORKERS := 4
+NUM_WORKER := 4
 ALWAYS_TLS := False
 
 all: init _run
