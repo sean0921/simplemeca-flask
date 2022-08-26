@@ -1,5 +1,0 @@
-build:
-  docker:
-    web: Dockerfile
-run:
-  web: sh -c '. /work/.venv/bin/activate && env ALWAYS_TLS="True" gunicorn --chdir simplemeca_flask -w 4 --bind 0.0.0.0:$PORT run_simplemeca:app'

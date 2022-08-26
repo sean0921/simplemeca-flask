@@ -60,7 +60,7 @@
 - `example_payload.json`
 
 ## TODO
-- [ ] Add alternative cloud backend to herokuapp: <https://blog.heroku.com/next-chapter>
+- [x] Add alternative cloud backend to herokuapp: <https://blog.heroku.com/next-chapter>
 - [ ] Add automated test code
 - [ ] Support arguments of moment tensor decompositions:
 ```bash
@@ -78,6 +78,7 @@ EOF
 
 ## Credit
 - Beachball Frontend: [IES, Academia Sinica](https://www.earth.sinica.edu.tw/)
+- Deployment: [GitHub Actions](https://github.com/features/actions), [Fly.io](https://fly.io)
 
 ## Resources
 - [PyGMT documentation](https://www.pygmt.org/latest/)
