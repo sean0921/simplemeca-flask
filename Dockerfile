@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y --no-install-recommends \
        python3 python3-pip python3-importlib-metadata python3-venv \
-       ca-certificates gmt-gshhg ghostscript gmt libgmt-dev gmt-dcw \
+       ca-certificates ghostscript gmt libgmt-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && python3 -m venv /work/.venv \
@@ -18,4 +18,4 @@ RUN apt-get update \
     && pip install --upgrade pip poetry_core setuptools \
     && pip install .
 CMD . /work/.venv/bin/activate \
-    && gunicorn --chdir simplemeca_flask -w 4 --bind 0.0.0.0:${PORT} run_simplemeca:app
+    && gunicorn --chdir simplemeca_flask -w ${NUM_WORKER} --bind 0.0.0.0:${PORT} run_simplemeca:app
