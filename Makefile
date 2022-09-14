@@ -12,8 +12,6 @@ init:
 
 run: init _run
 
-test: init _test
-
 ## skip poetry install procedure
 _run:
 	@env ALWAYS_TLS=$(ALWAYS_TLS) \
@@ -21,9 +19,6 @@ _run:
                 --chdir simplemeca_flask \
                 -w ${NUM_WORKER} --bind 0.0.0.0:$(PORT) \
                 run_simplemeca:app
-
-_test:
-	@cd test && bash local_gui_test.bash
 
 purge: clean
 	@poetry env remove python3

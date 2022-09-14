@@ -19,11 +19,8 @@
 ## Run the Web Application
 - `make run`
 
-## Test the Web Application
-- Linux / WSLg: `make test` ( `bash local_gui_test.bash` )
-![](docs/demo_test1.webp)
-![](docs/demo_test2.webp)
-![](docs/demo_test3.webp)
+## Try the Web Application
+- Linux / WSLg: use [simplemeca-client](https://github.com/sean0921/simplemeca-client) project.
 
 ## Method
 - **URL**: POST `/simplemeca`
