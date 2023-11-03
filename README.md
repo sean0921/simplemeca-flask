@@ -7,11 +7,7 @@
 - Idea: <http://qcntw.earth.sinica.edu.tw/beachball/>
 
 ## Requirements
-- Python 3.8 ~ 3.10
-- Generic Mapping Tools (GMT, >= 6.3.0)
-- Pipenv 2021.11.23
-- PyGMT 0.5.0
-- Flask 2.0.2
+- see `pyproject.toml`
 
 ## Create Virtual Environment
 - `make init`
