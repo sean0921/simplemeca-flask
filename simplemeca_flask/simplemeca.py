@@ -49,7 +49,7 @@ def pygmt_simplemeca(
             longitude=0,
             latitude=0,
             depth=0,
-            G=f'{color_r}/{color_g}/{color_b}'
+            compressionfill=f'{color_r}/{color_g}/{color_b}'
     )
     fig_input.text(
             x=0,
