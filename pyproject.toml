@@ -8,12 +8,12 @@ readme = "README.md"
 packages = [{include = "simplemeca_flask"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-pygmt = "^0.10.0"
-Flask = "^3.0.3"
-Flask-Cors = "^4.0.0"
-gunicorn = "^22.0.0"
-setuptools = "^70.0.0"
+python = "^3.11"
+pygmt = "^0.16.0"
+Flask = "^3.1.1"
+Flask-Cors = "^6.0.1"
+gunicorn = "^23.0.0"
+setuptools = "^80.0.0"
 
 [build-system]
 requires = ["poetry-core"]
