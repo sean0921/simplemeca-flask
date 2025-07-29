@@ -54,7 +54,8 @@
                   },
                   "title": {
                     "type": "string",
-                    "description": "Title of the resource"
+                    "description": "Title of the resource",
+                    "default": "Hello World!"
                   }
                 }
               }
