@@ -18,9 +18,13 @@
 ## Try the Web Application
 - Linux / WSLg: use [simplemeca-client](https://github.com/sean0921/simplemeca-client) project.
 
+## API Method
+### Swagger UI Docs
+- <https://simplemeca-flask.fly.dev/v1/simplemeca/docs/>
+
 ![](/data/readme_show_api.png)
 
-## Method
+### Legacy Reference
 - **URL**: POST `/simplemeca`
 - **Header**:
     | Key | Value | Required |
