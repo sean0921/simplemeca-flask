@@ -2,7 +2,7 @@
 
 ![](docs/demo.webp)
 
-- Demo web page: <https://beachball.clam.moe>
+- Demo web page: <https://beachball.clam.tw>
 - Based on previous work: <https://github.com/sean0921/workshop_demo_20210805>
 - Idea: <http://qcntw.earth.sinica.edu.tw/beachball/>
 
