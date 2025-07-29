@@ -18,6 +18,8 @@
 ## Try the Web Application
 - Linux / WSLg: use [simplemeca-client](https://github.com/sean0921/simplemeca-client) project.
 
+![](/data/readme_show_api.png)
+
 ## Method
 - **URL**: POST `/simplemeca`
 - **Header**:
