@@ -17,6 +17,7 @@
 
 ## Try the Web Application
 - Linux / WSLg: use [simplemeca-client](https://github.com/sean0921/simplemeca-client) project.
+- Other OS: use your friendly api testing tool (swagger ui, postman...etc), manually open the image url.
 
 ## API Method
 ### Swagger UI Docs
