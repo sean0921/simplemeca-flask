@@ -1,0 +1,5 @@
+{
+ "SWAGGER_URL" : "/v1/simplemeca/docs",
+ "API_URL" : "/static/swagger_manualgen.json",
+ "CLIENT_ENDPOINT_URL" : "https://beachball.clam.tw"
+}

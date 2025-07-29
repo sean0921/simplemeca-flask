@@ -3,12 +3,14 @@
 from typing import Dict, Any
 from flask import Flask, request, redirect, url_for
 from flask_cors import CORS
-from pathlib import Path
+from flask_swagger_ui import get_swaggerui_blueprint
+from pathlib import Path, PurePath
 import pygmt
 import os
 import hashlib
 import json
 
+PUBLIC_CONFIG_PATH = Path.cwd().joinpath('public_config.json')
 
 # ref:
 # https://www.doc.ic.ac.uk/~nuric/coding/how-to-hash-a-dictionary-in-python.html
@@ -78,12 +80,38 @@ def meca_sdr_gen(expected_result_uri: str, this_payload: dict):
 
 
 app = Flask(__name__)
-CORS(app)
 
+with open(PUBLIC_CONFIG_PATH, 'r') as fp_1:
+    this_config=json.load(fp_1)
+
+SWAGGER_URL = this_config["SWAGGER_URL"]  # URL for exposing Swagger UI (without trailing '/')
+API_URL = this_config["API_URL"]  # Our API url (can of course be a local resource)
+CLIENT_ENDPOINT_URL = this_config["CLIENT_ENDPOINT_URL"]
+
+# Call factory function to create our blueprint
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    API_URL,
+    config={  # Swagger UI config overrides
+        'app_name': "SimpleMeca v1 API"
+    },
+    # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
+    #    'clientId': "your-client-id",
+    #    'clientSecret': "your-client-secret-if-required",
+    #    'realm': "your-realms",
+    #    'appName': "your-app-name",
+    #    'scopeSeparator': " ",
+    #    'additionalQueryStringParams': {'test': "hello"}
+    # }
+)
+
+app.register_blueprint(swaggerui_blueprint)
+
+CORS(app)
 
 @app.route('/')
 def index():
-    return redirect("https://github.com/sean0921/simplemeca-flask", code=302)
+    return redirect(CLIENT_ENDPOINT_URL, code=302)
 
 
 @app.route('/simplemeca', methods=['GET', 'POST'])

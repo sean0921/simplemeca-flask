@@ -1,0 +1,86 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "SimpleMeca API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/simplemeca": {
+      "post": {
+        "summary": "Create a SimpleMeca resource",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["strike", "dip", "rake", "color_r", "color_g", "color_b", "title"],
+                "properties": {
+                  "strike": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Strike value",
+		    "default": 180.0
+                  },
+                  "dip": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Dip value",
+		    "default": 45.0
+                  },
+                  "rake": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Rake value",
+		    "default": 0.0
+                  },
+                  "color_r": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "R value in RGB colors",
+		    "default": 255
+                  },
+                  "color_g": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "G value in RGB colors",
+		    "default": 0
+                  },
+                  "color_b": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "B value in RGB colors",
+		    "default": 0
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the resource"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "image_url": {
+                      "type": "string",
+                      "format": "uri",
+                      "example": "http://127.0.0.1:5000/static/shound-be-sha256-format.png"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
