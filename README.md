@@ -23,7 +23,7 @@
 ### Swagger UI Docs
 - <https://simplemeca-flask.fly.dev/v1/simplemeca/docs/>
 
-![](docs/readme_show_api.png)
+![](docs/readme_show_api.webp)
 
 ### Legacy Reference
 - **URL**: POST `/simplemeca`
