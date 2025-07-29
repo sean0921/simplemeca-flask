@@ -63,7 +63,7 @@ def pygmt_simplemeca(
     return(fig_input)
 
 
-def meca_sdr_gen(expected_result_uri: str, this_payload: dict):
+def meca_aki_richard_gen(expected_result_uri: str, this_payload: dict):
     current_dir = os.getcwd()
     fig = pygmt.Figure()
     fig = pygmt_simplemeca(
@@ -129,7 +129,7 @@ def simplemeca_v1():
         result_url = request.url_root + result_uri
         if not Path(result_uri).is_file():
             print(f'Creating: {result_uri}....', end=' ')
-            meca_sdr_gen(result_uri, this_payload)
+            meca_aki_richard_gen(result_uri, this_payload)
             print('OK!')
         else:
             print('image exists, skip!')
