@@ -40,7 +40,7 @@ def pygmt_simplemeca(
     fig_input.basemap(
         region=[-1, 1, -1, 0.73],
         projection="M6c",
-        frame=[f'+n+t"{title}"']
+        frame=[f'+n+t{title}']
     )
     focal_mechanism = dict(strike=strike, dip=dip, rake=rake, magnitude=3.5)
     fig_input.meca(
